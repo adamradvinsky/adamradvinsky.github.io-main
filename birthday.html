@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Happy Birthday Mom ❤️</title>
+    <style>
+        #stars {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            color: white;
+            background: #000;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Parallax background */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+
+        }
+
+        .parallax-img {
+            position: absolute;
+            width: 450px;
+            opacity: 0.15;
+            border-radius: 20px;
+            transform: translateY(0px);
+        }
+
+        /* Text sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+            font-size: 2rem;
+            line-height: 1.5;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Masonry-style collage */
+        .collage {
+            background: transparent;
+            padding: 40px;
+            column-count: 5;
+            column-gap: 14px;
+        }
+
+        @media (max-width: 1200px) {
+            .collage {
+                column-count: 4;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .collage {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .collage {
+                column-count: 2;
+            }
+        }
+
+        .pic-block {
+            background: #1b1b1b;
+            border-radius: 16px;
+            padding: 6px;
+            margin-bottom: 14px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .pic-block img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .caption {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #eee;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Parallax background layer -->
+    <div class="parallax-layer" id="parallax-bg">
+        <div id="stars"></div>
+        <img src="images/moon.png" class="parallax-img" style="left:50%; top:10%; width:1002px;">
+    </div>
+
+    <!-- TEXT SECTIONS -->
+    <div class="section">Happy Birthday Mom ❤️</div>
+    <div class="section">You mean the world to me.</div>
+    <div class="section">Thank you for everything you've done.</div>
+    <div class="section">You make life brighter for everyone around you.</div>
+    <div class="section">I love you more than you know.</div>
+
+    <div class="section" style="min-height:auto; padding-bottom:0;">
+        <h1>So here are 50 pictures and reasons to why I love you</h1>
+    </div>
+
+    <!-- Masonry Collage -->
+    <div class="collage" id="collage"></div>
+
+    <!-- Final special section -->
+    <div class="section" style="min-height:auto; padding:80px 40px; flex-direction:column;">
+        <h2 style="margin-bottom:40px;">And of course… you and me</h2>
+        <div style="max-width:420px; width:100%;">
+            <img src="images/us.jpg" alt="You and me"
+                style="width:100%; border-radius:24px; box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+            <p style="margin-top:20px; font-size:1.1rem; opacity:0.9;">Happy Birthday Mom.</p>
+            <p style="margin-top:20px; font-size:1.1rem; opacity:0.9;">- Adam</p>
+        </div>
+    </div>
+
+    <script>
+        /* Reveal text sections */
+        const sections = document.querySelectorAll('.section');
+        function revealText() {
+            const trigger = window.innerHeight * 0.85;
+            sections.forEach(sec => {
+                const top = sec.getBoundingClientRect().top;
+                if (top < trigger) sec.classList.add('visible');
+            });
+        }
+        window.addEventListener('scroll', revealText);
+        revealText();
+
+        /* Parallax effect */
+        const bgImgs = document.querySelectorAll('.parallax-img');
+        window.addEventListener('scroll', () => {
+            const offset = window.scrollY;
+            bgImgs.forEach((img, i) => {
+                const speed = 0.09 + i * 0.04;
+                img.style.transform = `translateY(${offset * speed}px)`;
+            });
+        });
+
+        const captions = [
+            "You always support me no matter what",
+            "You always know how to make things better.",
+            "Thank you for every sacrifice you’ve made.",
+            "You taught me kindness.",
+            "you persevere throuogh anything.",
+            "You were always there when I needed you.",
+            "You make our house feel like home.",
+            "You can always lighten my mood.",
+            "You believe in me even when I don’t.",
+            "You always put others first.",
+
+            "You inspire me to be better.",
+            "You never gave up on me.",
+            "Your hugs fix everything.",
+            "You make hard days easier.",
+            "you made me !",
+            "Your the warmthn in my life.",
+            "You make every holiday special.",
+            "You turn small moments into memories.",
+            "You’re stronger than you know.",
+            "You make everyone feel loved.",
+
+            "You taught me patience.",
+            "You taught me honesty.",
+            "You always listen.",
+            "You understand me.",
+            "You’re my role model.",
+            "You make life brighter.",
+            "Your beautiful (thats where i get it from).",
+            "You give without expecting anything back.",
+            "You make people feel seen.",
+            "You can make anyone laugh.",
+
+            "You’re my biggest supporter.",
+            "You never stop caring.",
+            "You make me feel proud.",
+            "You’ve shaped who I am.",
+            "You are endlessly kind.",
+            "You bring warmth wherever you go.",
+            "You’re my safe place.",
+            "You always find the good.",
+            "You make everything feel possible.",
+            "You love with your whole heart.",
+
+            "You’re my hero.",
+            "You mean more to me than words can say.",
+            "You make the world feel gentler.",
+            "You make me feel like me.",
+            "You make life beautiful.",
+            "you gave me a best friend",
+            "You are deeply loved.",
+            "You are appreciated every day.",
+            "You are amazing."
+        ];
+
+        /* Generate 50 masonry photos */
+        captions.forEach((text, i) => {
+            const block = document.createElement('div');
+            block.className = 'pic-block';
+            block.innerHTML = `
+        <img src="images/birthday/photo${i + 1}.jpg" alt="photo ${i + 1}">
+        <div class="caption">${text}</div>
+    `;
+            collage.appendChild(block);
+        });
+
+
+        /* ===== STAR FIELD ===== */
+        const starContainer = document.getElementById('stars');
+        const STAR_COUNT = 220;
+        const stars = [];
+
+        for (let i = 0; i < STAR_COUNT; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+
+            const size = Math.random() * 2.2 + 0.4;
+            const depth = Math.random() * 0.6 + 0.1;
+
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 220}%`;
+            star.style.opacity = Math.random() * 0.5 + 0.15;
+
+            starContainer.appendChild(star);
+            stars.push({ el: star, depth });
+        }
+
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            stars.forEach(star => {
+                star.el.style.transform = `translateY(${y * star.depth}px)`;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

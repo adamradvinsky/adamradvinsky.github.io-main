@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+    }
+    input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #ff8fb1;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter the Birthday Password ✨</h2>
+    <input id="pw" type="password" placeholder="Password">
+    <br>
+    <button onclick="enter()">Enter</button>
+  </div>
+
+  <script>
+    function enter() {
+      const pw = document.getElementById('pw').value;
+      const correct = "6312727"; // ← change to your real password
+      if (pw === correct) window.location.href = "birthday.html";
+      else alert("Incorrect password!");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>Adam Radvinsky</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+
+
+	<!-- Hero Section with Parallax -->
+	<section class="hero">
+		<h1>Adam Radvinsky</h1>
+		<p>SFU Computer Science Major</p>
+	</section>
+
+	<!-- Floating Planes -->
+	<section class="plane">
+		<h2>send me a message</h2>
+		<!-- <a href="#" class="clean-btn" id="emailSend">test email</a> -->
+
+		<div class="message-box">
+			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
+			<button class="clean-btn" onclick="sendMessage()">Send</button>
+		</div>
+	</section>
+
+
+	
+	<script src="assets/js/emailSend.js"></script>
+
+	<!-- Scripts -->
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// 1. Grab the button
+			const btn = document.getElementById('emailSend');
+
+			// 2. Check if it exists, then attach the function
+			if (btn) {
+				btn.addEventListener('click', (e) => {
+					e.preventDefault(); // Stops the page from flickering/reloading
+					sendEmail("message");        // Calls the function in emailSend.js
+				});
+			}
+		});
+	</script>
+
+	<script>
+		function sendMessage() {
+			const message = document.getElementById("messageInput").value;
+			sendEmail(message);
+			console.log("Message:", message);
+		}
+	</script>
+</body>
+
+</html>

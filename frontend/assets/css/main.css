@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+}
+
+/* Parallax Background Hero */
+.hero {
+    height: 100vh;
+    background-image: url("firewatch.jpg");
+    /* change to your file */
+    background-attachment: fixed;
+    /* THIS creates parallax */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 96px;
+    /* MUCH BIGGER */
+    margin: 0;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero p {
+    font-size: 28px;
+    margin-top: 20px;
+    opacity: 0.9;
+}
+
+.plane {
+    width: 100%;
+    padding: 120px 10vw;
+    /* responsive side spacing */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+/* spacing between planes */
+.plane+.plane {
+    margin-top: 0px;
+}
+
+/* .plane:hover {
+    transform: translateY(-10px);
+} */
+
+.plane h2 {
+    font-size: 42px;
+    margin-top: 0;
+}
+
+/* Subtle floating hover effect */
+.plane:hover {
+    /* transform: translateY(-10px); */
+}
+
+.plane h2 {
+    font-size: 36px;
+    margin-top: 0;
+}
+
+.clean-btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 32px;
+
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  color: white;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 12px;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Hover effect */
+.clean-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* Click effect */
+.clean-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.contact-box {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 20px;
+
+  font-size: 16px;
+  font-family: inherit;
+
+  border-radius: 15px;
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  backdrop-filter: blur(5px);
+  resize: vertical;
+}
+
+textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+}

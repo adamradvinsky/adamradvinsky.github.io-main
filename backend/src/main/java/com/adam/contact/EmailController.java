@@ -12,11 +12,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 @RestController
-//@CrossOrigin(origins = "*")
 @CrossOrigin(origins="*")
 public class EmailController{
 
-    @Autowired
+    @Autowired  
     private JavaMailSender mailSender;
 
     @PostMapping("/send")

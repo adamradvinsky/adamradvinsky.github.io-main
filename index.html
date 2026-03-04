@@ -21,10 +21,8 @@
 		<p>SFU Computer Science Major</p>
 	</section>
 
-	<!-- Floating Planes -->
 	<section class="plane">
 		<h2>send me a message</h2>
-		<!-- <a href="#" class="clean-btn" id="emailSend">test email</a> -->
 
 		<div class="message-box">
 			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
@@ -32,11 +30,25 @@
 		</div>
 	</section>
 
+	<section class="plane">
+		<h2>ask spotify</h2>
+		<!-- <a href="#" class="clean-btn" id="askSpotify">ask</a> -->
+		
+		<button class = "clean-btn" onclick="askSpotify()">ask</button>
 
-	
+		<!-- <div class="message-box">
+			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
+			<button class="clean-btn" onclick="sendMessage()">Send</button>
+		</div> -->
+	</section>
+
+
+
 	<script src="assets/js/emailSend.js"></script>
+	
+	<script src="assets/js/spotifyAPI.js"></script>
 
-	<!-- Scripts -->
+	<!-- Scripts
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			// 1. Grab the button
@@ -50,12 +62,20 @@
 				});
 			}
 		});
-	</script>
+	</script> -->
 
 	<script>
 		function sendMessage() {
 			const message = document.getElementById("messageInput").value;
 			sendEmail(message);
+			console.log("Message:", message);
+		}
+	</script>
+
+	<script>
+		function sendMessage() {
+			const message = document.getElementById("askSpotify").value;
+			askSpotify();
 			console.log("Message:", message);
 		}
 	</script>

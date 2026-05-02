@@ -1,21 +1,32 @@
-async function askSpotify() {
-
-//   const url = "http://localhost:8080/send";
-
-//   try {
 
 
-//     console.log(" TRYING TO SEND AN EMAIL")
-//     const respons = fetch(url, {
-//       method: "POST",
-//       body: message ,
-//     });
+async function spotifyLogin() {
 
-//     console.log(" I have sent an email !?")
+    console.log("logging into spotify")
+    window.location.href = "http://127.0.0.1:8080/login";
 
-//   } catch (error) {
-//     console.log(error);
-//   }
 
-    console.log("fina ask spotify")
 }
+
+
+
+async function spotifyDisplay() {
+
+    console.log("spotify display smthn")
+    try {
+        const response = await fetch("http://localhost:8080/spotifydisplay")
+
+        const data = await response.text();
+        
+        
+        console.log(data);
+        
+        console.log("data should of went through");
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+

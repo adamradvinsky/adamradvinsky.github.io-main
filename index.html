@@ -31,15 +31,19 @@
 	</section>
 
 	<section class="plane">
-		<h2>ask spotify</h2>
-		<!-- <a href="#" class="clean-btn" id="askSpotify">ask</a> -->
+		<h2>askspotify</h2>
 		
-		<button class = "clean-btn" onclick="askSpotify()">ask</button>
+		<button class = "clean-btn" onclick="askSpotify()">login</button>
 
-		<!-- <div class="message-box">
-			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
-			<button class="clean-btn" onclick="sendMessage()">Send</button>
-		</div> -->
+		
+	</section>
+
+	<section class="plane">
+		<h2>display spotify</h2>
+		
+		<button class = "clean-btn" onclick="displaySpotify()">display</button>
+
+		
 	</section>
 
 
@@ -62,7 +66,7 @@
 				});
 			}
 		});
-	</script> -->
+	</script> --> 
 
 	<script>
 		function sendMessage() {
@@ -73,12 +77,20 @@
 	</script>
 
 	<script>
-		function sendMessage() {
-			const message = document.getElementById("askSpotify").value;
-			askSpotify();
-			console.log("Message:", message);
+		function askSpotify() {
+			console.log("tryna ask bit ooga booga");
+			spotifyLogin();
+			console.log("finna ask spotify");
 		}
 	</script>
+
+	<script>
+		function displaySpotify() {
+			console.log("display spotify !!");
+			spotifyDisplay();
+		}
+	</script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 
 </html>

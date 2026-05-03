@@ -10,63 +10,22 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
+
+	<script type="importmap">
+	{
+  		"imports": {
+    	"three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+    	"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+  					}
+	}
+	</script>
 </head>
 
 <body class="is-preload">
 
 
-	<!-- Hero Section with Parallax -->
-	<section class="hero">
-		<h1>Adam Radvinsky</h1>
-		<p>SFU Computer Science Major</p>
-	</section>
+	<div id="info">Dbloabruilowahjreoiuaw</div>
 
-	<section class="plane">
-		<h2>send me a message</h2>
-
-		<div class="message-box">
-			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
-			<button class="clean-btn" onclick="sendMessage()">Send</button>
-		</div>
-	</section>
-
-	<section class="plane">
-		<h2>askspotify</h2>
-		
-		<button class = "clean-btn" onclick="askSpotify()">login</button>
-
-		
-	</section>
-
-	<section class="plane">
-		<h2>display spotify</h2>
-		
-		<button class = "clean-btn" onclick="displaySpotify()">display</button>
-
-		
-	</section>
-
-
-
-	<script src="assets/js/emailSend.js"></script>
-	
-	<script src="assets/js/spotifyAPI.js"></script>
-
-	<!-- Scripts
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			// 1. Grab the button
-			const btn = document.getElementById('emailSend');
-
-			// 2. Check if it exists, then attach the function
-			if (btn) {
-				btn.addEventListener('click', (e) => {
-					e.preventDefault(); // Stops the page from flickering/reloading
-					sendEmail("message");        // Calls the function in emailSend.js
-				});
-			}
-		});
-	</script> --> 
 
 	<script>
 		function sendMessage() {
@@ -90,7 +49,66 @@
 			spotifyDisplay();
 		}
 	</script>
-<script type="module" src="assets/js/main.js"></script>
+
+	<!-- three.js-->
+	<script type="module" src="assets/js/main.js"></script>
+
+	<script src="assets/js/emailSend.js"></script>
+
+	<script src="assets/js/spotifyAPI.js"></script>
+
+
+
 </body>
 
 </html>
+
+<!--
+	<section class="hero">
+		<h1>Adam Radvinsky</h1>
+		<p>SFU Computer Science Major</p>
+	</section> 
+	
+-->
+
+<!-- <section class="plane">
+		<h2>send me a message</h2>
+
+		<div class="message-box">
+			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
+			<button class="clean-btn" onclick="sendMessage()">Send</button>
+		</div>
+	</section>
+
+	<section class="plane">
+		<h2>askspotify</h2>
+		
+		<button class = "clean-btn" onclick="askSpotify()">login</button>
+
+		
+	</section>
+
+	<section class="plane">
+		<h2>display spotify</h2>
+		
+		<button class = "clean-btn" onclick="displaySpotify()">display</button>
+
+		
+	</section> -->
+
+
+<!-- Scripts
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// 1. Grab the button
+			const btn = document.getElementById('emailSend');
+			
+			// 2. Check if it exists, then attach the function
+			if (btn) {
+				btn.addEventListener('click', (e) => {
+					e.preventDefault(); // Stops the page from flickering/reloading
+					sendEmail("message");        // Calls the function in emailSend.js
+					});
+					}
+					});
+				</script> -->

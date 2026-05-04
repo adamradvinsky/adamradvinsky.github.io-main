@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 // importer for 3d models
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // my rooms model
 let roomModel;
@@ -71,6 +71,14 @@ loader.load('scene.gltf', (gltf) => {
     roomModel = gltf.scene;
     roomModel.position.set(25, -3, -0);
     roomModel.rotation.set(0, Math.PI - 0.8, 0);
+
+    // wireframe
+    // roomModel.traverse((node) => {
+    //     if (node.isMesh) {
+    //         // Toggle the wireframe property on the existing material
+    //         node.material.wireframe = true;
+    //     }
+    // });
     scene.add(roomModel);
 
 });
@@ -81,6 +89,20 @@ const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 
 const cube = new THREE.Mesh(cubeMesh, cubeMaterial);
 scene.add(cube);
+
+// 3d pop up
+const popupGeometry = new THREE.PlaneGeometry(2, 1);
+const popupMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 1
+});
+let popupVisible = false;
+
+const popup = new THREE.Mesh(popupGeometry, popupMaterial);
+popup.position.set(3, 3, 3);
+let popupProgress = 0;
+scene.add(popup);
 
 
 
@@ -96,9 +118,11 @@ scene.add(spotLight.target);
 
 
 let hoveredObject = null;
+let speed = 0.1;
 
 function animate(time) {
     controls.update();
+    popup.lookAt(camera.position);
 
     raycaster.setFromCamera(mouse, camera);
 
@@ -106,24 +130,55 @@ function animate(time) {
 
     if (intersects.length > 0) {
         const object = intersects[0].object;
-
         if (hoveredObject != object) {
             if (hoveredObject) {
                 hoveredObject.material.emissive.set(0x000000);
+                closePopup();
             }
 
             hoveredObject = object;
             hoveredObject.material.emissive.set(0x333333);
+            openPopup();
         }
     } else {
         // If nothing is intersected, reset the previous hovered object
         if (hoveredObject) {
             hoveredObject.material.emissive.set(0x000000);
+            closePopup();
             hoveredObject = null;
         }
     }
+
+
+    if (popupVisible) {
+        // if (popupProgress < 0.8) {
+
+        //     popup.position.x += (Math.random() - 0.5);
+
+        //     popup.position.y += (Math.random() - 0.5);
+
+        //     popup.material.opacity = popupProgress * (Math.random() + 0.5);
+        // }
+        popupProgress += speed
+    } else {
+        popupProgress -= speed;
+    }
+
+    popup.position.y = 1.5 + (1 - popupProgress) * 0.5;
+    popupProgress = Math.max(0, Math.min(1, popupProgress));
+    popup.scale.set = (popupProgress, popupProgress, popupProgress);
+    popup.material.opacity = popupProgress;
 
     renderer.render(scene, camera);
 }
 
 renderer.setAnimationLoop(animate);
+
+
+function openPopup() {
+    popupVisible = true;
+}
+
+function closePopup() {
+    popupVisible = false;
+}

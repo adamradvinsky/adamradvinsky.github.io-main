@@ -4,6 +4,10 @@ import * as THREE from 'three';
 // importer for 3d models
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import CameraController from './threeD/CameraController.js';
+import SpotLightController from './threeD/SpotLightController.js';
+
+
 
 // my rooms model
 let roomModel;
@@ -40,16 +44,16 @@ function onDrag(event) {
 
 
 
-
+// set up camera
 const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight, // aspect ratio
     0.1, // near clipping
     1000, // far clipping
 );
+const camController = new CameraController(camera);
 
-// // set camera position
-camera.position.set(0, 9, 20);
+
 
 
 // sets up renderer
@@ -80,8 +84,9 @@ loader.load('scene.gltf', (gltf) => {
     //     }
     // });
     scene.add(roomModel);
-
 });
+
+
 
 //const cube = new THREE.CubeGeom
 const cubeMesh = new THREE.BoxGeometry(3, 3, 3);
@@ -107,14 +112,10 @@ scene.add(popup);
 
 
 const spotLight = new THREE.SpotLight(0xffffff, 500, 1000, 1.5, 1);
-spotLight.position.set(0, 10, 0);
-spotLight.rotation.set(100, 20, 20);
-spotLight.target.position.set(0, -10, -10);
+const spotLightController = new SpotLightController(spotLight);
 scene.add(spotLight);
 scene.add(spotLight.target);
 
-// const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
-// scene.add(hemiLight);
 
 
 let hoveredObject = null;
@@ -145,29 +146,21 @@ function animate(time) {
         if (hoveredObject) {
             hoveredObject.material.emissive.set(0x000000);
             closePopup();
-            hoveredObject = null;
+            hoveredObject = null; 
         }
     }
 
 
+
     if (popupVisible) {
-        // if (popupProgress < 0.8) {
-
-        //     popup.position.x += (Math.random() - 0.5);
-
-        //     popup.position.y += (Math.random() - 0.5);
-
-        //     popup.material.opacity = popupProgress * (Math.random() + 0.5);
-        // }
         popupProgress += speed
     } else {
         popupProgress -= speed;
     }
 
-    popup.position.y = 1.5 + (1 - popupProgress) * 0.5;
-    popupProgress = Math.max(0, Math.min(1, popupProgress));
-    popup.scale.set = (popupProgress, popupProgress, popupProgress);
-    popup.material.opacity = popupProgress;
+
+    camController.update(time);
+    spotLightController.update(time);
 
     renderer.render(scene, camera);
 }

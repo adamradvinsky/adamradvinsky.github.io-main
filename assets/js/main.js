@@ -21,7 +21,14 @@ let velocityY = 0;
 // on drag
 let isDragging = false;
 document.addEventListener('mousedown', () => isDragging = true);
+
 document.addEventListener('mousemove', onDrag);
+window.addEventListener('mousemove', (event) => {
+    // Convert mouse position to normalized device coordinates (-1 to +1)
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+});
+
 document.addEventListener('mouseup', () => isDragging = false);
 
 function onDrag(event) {
@@ -31,14 +38,6 @@ function onDrag(event) {
     }
 }
 
-const intersects = raycaster.intersectObjects(scene.children, true);
-console.log("adams the goat");
-
-if (intersects.length > 0) {
-    const clickedObjects = intersects[0].object;
-    console.log(clickedObjects.name);
-
-}
 
 
 
@@ -76,6 +75,14 @@ loader.load('scene.gltf', (gltf) => {
 
 });
 
+//const cube = new THREE.CubeGeom
+const cubeMesh = new THREE.BoxGeometry(3, 3, 3);
+const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+
+const cube = new THREE.Mesh(cubeMesh, cubeMaterial);
+scene.add(cube);
+
+
 
 const spotLight = new THREE.SpotLight(0xffffff, 500, 1000, 1.5, 1);
 spotLight.position.set(0, 10, 0);
@@ -88,10 +95,33 @@ scene.add(spotLight.target);
 // scene.add(hemiLight);
 
 
-
+let hoveredObject = null;
 
 function animate(time) {
     controls.update();
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects([cube], true);
+
+    if (intersects.length > 0) {
+        const object = intersects[0].object;
+
+        if (hoveredObject != object) {
+            if (hoveredObject) {
+                hoveredObject.material.emissive.set(0x000000);
+            }
+
+            hoveredObject = object;
+            hoveredObject.material.emissive.set(0x333333);
+        }
+    } else {
+        // If nothing is intersected, reset the previous hovered object
+        if (hoveredObject) {
+            hoveredObject.material.emissive.set(0x000000);
+            hoveredObject = null;
+        }
+    }
 
     renderer.render(scene, camera);
 }

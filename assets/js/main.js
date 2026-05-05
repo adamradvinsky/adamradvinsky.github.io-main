@@ -35,6 +35,18 @@ window.addEventListener('mousemove', (event) => {
 
 document.addEventListener('mouseup', () => isDragging = false);
 
+
+let bruh = new THREE.Vector3(-22.243537735881734, 5.039747360887239, -21.77799380868578);
+let testmovecamera = false;
+document.addEventListener("keydown", (event) => {
+    if (event.key === "a") {
+        camController.MoveCamera(bruh, testpopup.position);
+    }
+})
+
+
+
+
 function onDrag(event) {
     if (isDragging) {
         velocityX = event.movementX * 0.005;
@@ -52,8 +64,6 @@ const camera = new THREE.PerspectiveCamera(
     1000, // far clipping
 );
 const camController = new CameraController(camera);
-
-
 
 
 // sets up renderer
@@ -76,15 +86,24 @@ loader.load('scene.gltf', (gltf) => {
     roomModel.position.set(25, -3, -0);
     roomModel.rotation.set(0, Math.PI - 0.8, 0);
 
-    // wireframe
+    // // wireframe
     // roomModel.traverse((node) => {
     //     if (node.isMesh) {
-    //         // Toggle the wireframe property on the existing material
-    //         node.material.wireframe = true;
+    //         // Toggle the wireframe property on the existing material    
+    //         node.material = sphereMaterial;
     //     }
     // });
     scene.add(roomModel);
 });
+
+
+
+
+// set up spotlight
+const spotLight = new THREE.SpotLight(0xffffff, 500, 1000, 1.5, 1);
+const spotLightController = new SpotLightController(spotLight);
+scene.add(spotLight);
+scene.add(spotLight.target);
 
 
 
@@ -94,6 +113,11 @@ const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 
 const cube = new THREE.Mesh(cubeMesh, cubeMaterial);
 scene.add(cube);
+
+
+
+
+
 
 // 3d pop up
 const popupGeometry = new THREE.PlaneGeometry(2, 1);
@@ -111,10 +135,20 @@ scene.add(popup);
 
 
 
-const spotLight = new THREE.SpotLight(0xffffff, 500, 1000, 1.5, 1);
-const spotLightController = new SpotLightController(spotLight);
-scene.add(spotLight);
-scene.add(spotLight.target);
+// 3d pop up
+const testpopmesh = new THREE.PlaneGeometry(20, 10);
+const testpopmaterial = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    transparent: true,
+    opacity: 1,
+    side: THREE.DoubleSide
+});
+
+const testpopup = new THREE.Mesh(testpopmesh, testpopmaterial);
+testpopup.position.set(-15, 6, -12);
+testpopup.rotation.y = 0.7999999999999999;
+scene.add(testpopup);
+
 
 
 
@@ -146,7 +180,7 @@ function animate(time) {
         if (hoveredObject) {
             hoveredObject.material.emissive.set(0x000000);
             closePopup();
-            hoveredObject = null; 
+            hoveredObject = null;
         }
     }
 

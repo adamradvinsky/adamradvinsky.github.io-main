@@ -97,6 +97,15 @@ loader.load('scene.gltf', (gltf) => {
 });
 
 
+// const geometry = new THREE.SphereGeometry(500, 60, 40);
+// geometry.scale(-1, 1, 1);
+// const texture = new THREE.TextureLoader().load('assets/images/viewpano.jpg');
+// const material = new THREE.MeshBasicMaterial({map: texture});
+
+// const sphere = new THREE.Mesh(geometry, material);
+// scene.add(sphere);
+
+
 
 
 // set up spotlight

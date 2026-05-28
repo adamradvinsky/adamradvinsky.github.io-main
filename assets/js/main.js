@@ -36,6 +36,21 @@ window.addEventListener('mousemove', (event) => {
 document.addEventListener('mouseup', () => isDragging = false);
 
 
+
+window.addEventListener('click', (event) => {
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects(sphere);
+
+    if (intersects.length > 0) {
+        console.log("position: " + intersects[0].point);
+
+    }
+
+});
+
+
 let bruh = new THREE.Vector3(-22.243537735881734, 5.039747360887239, -21.77799380868578);
 let testmovecamera = false;
 document.addEventListener("keydown", (event) => {
@@ -93,17 +108,17 @@ loader.load('scene.gltf', (gltf) => {
     //         node.material = sphereMaterial;
     //     }
     // });
-    scene.add(roomModel);
+    //scene.add(roomModel);
 });
 
 
-// const geometry = new THREE.SphereGeometry(500, 60, 40);
-// geometry.scale(-1, 1, 1);
-// const texture = new THREE.TextureLoader().load('assets/images/viewpano.jpg');
-// const material = new THREE.MeshBasicMaterial({map: texture});
+const geometry = new THREE.SphereGeometry(500, 60, 40);
+geometry.scale(-1, 1, 1);
+const texture = new THREE.TextureLoader().load('assets/images/aes.jpg');
+const material = new THREE.MeshBasicMaterial({ map: texture });
 
-// const sphere = new THREE.Mesh(geometry, material);
-// scene.add(sphere);
+const sphere = new THREE.Mesh(geometry, material);
+scene.add(sphere);
 
 
 
@@ -121,7 +136,7 @@ const cubeMesh = new THREE.BoxGeometry(3, 3, 3);
 const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 
 const cube = new THREE.Mesh(cubeMesh, cubeMaterial);
-scene.add(cube);
+//scene.add(cube);
 
 
 
@@ -140,7 +155,7 @@ let popupVisible = false;
 const popup = new THREE.Mesh(popupGeometry, popupMaterial);
 popup.position.set(3, 3, 3);
 let popupProgress = 0;
-scene.add(popup);
+//scene.add(popup);
 
 
 
@@ -170,7 +185,9 @@ function animate(time) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    const intersects = raycaster.intersectObjects([cube], true);
+    const intersects = raycaster.intersectObjects(sphere);
+
+    //console.log("position: " + intersects.position);
 
     if (intersects.length > 0) {
         const object = intersects[0].object;

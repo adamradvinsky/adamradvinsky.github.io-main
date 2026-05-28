@@ -1,126 +1,118 @@
-<!DOCTYPE HTML>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Adam Radvinsky</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
-
-	<script type="importmap">
-	{
-  		"imports": {
-    	"three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
-    	"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
-  					}
-	}
-	</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam's Room</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+<body>
 
-<body class="is-preload">
+  <div id="scene">
+    <svg id="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <clipPath id="monitor-clip">
+          <polygon id="monitor-clip-poly" points="432,600 648,600 648,737 432,737"/>
+        </clipPath>
+        <filter id="glow-blue" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-white" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <pattern id="scanlines" patternUnits="userSpaceOnUse" width="2" height="4">
+          <line x1="0" y1="0" x2="2" y2="0" stroke="rgba(0,0,0,0.5)" stroke-width="1"/>
+          <line x1="0" y1="2" x2="2" y2="2" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        </pattern>
+      </defs>
 
-	<!-- popup -->
-	<div id="popup" style="
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 15px;
-    background: white;
-    border: 1px solid black;
-    display: none;
-	">
-		<p>this is a box</p>
-		<button onclick="closePopup()">Close</button>
-	</div>
+      <image id="svg-room" href="room.jpg" x="0" y="0"/>
+      <image id="monitor-img" href="" x="432" y="600" width="216" height="137"
+             clip-path="url(#monitor-clip)"
+             preserveAspectRatio="xMidYMid slice"
+             opacity="0"
+             style="pointer-events:none"/>
+      <rect id="monitor-scanlines" x="432" y="600" width="216" height="137"
+            clip-path="url(#monitor-clip)"/>
+      <polygon id="monitor-flash" points="432,600 648,600 648,737 432,737"/>
 
+      <g id="regions-layer"></g>
 
+      <g id="draw-preview" style="pointer-events:none">
+        <polygon id="draw-fill-preview"
+                 fill="rgba(255,130,0,0.12)"
+                 stroke="#f80"
+                 stroke-width="1.5"
+                 stroke-dasharray="5,4"
+                 points=""/>
+        <line id="draw-snap-line"
+              stroke="#f80" stroke-width="1"
+              stroke-dasharray="4,3"
+              x1="0" y1="0" x2="0" y2="0" opacity="0"/>
+      </g>
+    </svg>
+  </div>
 
-	<script>
-		function sendMessage() {
-			const message = document.getElementById("messageInput").value;
-			sendEmail(message);
-			console.log("Message:", message);
-		}
-	</script>
+  <div id="tooltip"></div>
 
-	<script>
-		function askSpotify() {
-			console.log("tryna ask bit ooga booga");
-			spotifyLogin();
-			console.log("finna ask spotify");
-		}
-	</script>
+  <!-- Projects overlay -->
+  <div id="projects-overlay">
+    <div id="projects-panel">
+      <div class="panel-chrome">
+        <div class="chrome-dot c" id="btn-close-projects"></div>
+        <div class="chrome-dot m"></div>
+        <div class="chrome-dot x"></div>
+        <div class="chrome-title">adam.dev — projects.exe</div>
+      </div>
+      <div class="panel-body">
+        <div class="panel-header">
+          <h1 id="panel-title">Projects</h1>
+          <p id="panel-sub"></p>
+        </div>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </div>
+  </div>
 
-	<script>
-		function displaySpotify() {
-			console.log("display spotify !!");
-			spotifyDisplay();
-		}
-	</script>
+  <!-- Region editor -->
+  <div id="edit-panel">
+    <h3>⚠ Region Editor</h3>
+    <div class="edit-section-label">New Region</div>
+    <input type="text" id="inp-name"    placeholder="Name  (e.g. Medals)"/>
+    <input type="text" id="inp-tooltip" placeholder="Tooltip  (e.g. 🥇 Medals)"/>
+    <select id="inp-type">
+      <option value="highlight">Highlight</option>
+      <option value="monitor">Monitor  (opens projects)</option>
+      <option value="link">External Link</option>
+    </select>
+    <input type="text" id="inp-url" placeholder="URL  (if type = link)" style="display:none"/>
+    <div class="btn-row" style="margin-top:4px">
+      <button class="edit-btn primary" id="btn-draw-start">✏ Draw</button>
+      <button class="edit-btn" id="btn-draw-finish" disabled>✓ Save</button>
+      <button class="edit-btn danger" id="btn-draw-cancel">✕</button>
+    </div>
+    <div class="edit-section-label">Saved Regions</div>
+    <div class="region-list" id="region-list"></div>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="edit-btn" id="btn-export">↓ Export JSON</button>
+      <button class="edit-btn danger" id="btn-reset">Reset Defaults</button>
+    </div>
+    <div id="edit-status">
+      Click "Draw" then click on the image to place polygon points.<br>
+      Double-click or click "Save" (≥3 pts) to finish.
+    </div>
+  </div>
 
-	<!-- three.js-->
-	<script type="module" src="assets/js/main.js"></script>
+  <button id="edit-toggle">⚙ edit regions</button>
 
-	<script src="assets/js/emailSend.js"></script>
-
-	<script src="assets/js/spotifyAPI.js"></script>
-
-
-
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
-
 </html>
-
-<!--
-	<section class="hero">
-		<h1>Adam Radvinsky</h1>
-		<p>SFU Computer Science Major</p>
-	</section> 
-	
--->
-
-<!-- <section class="plane">
-		<h2>send me a message</h2>
-
-		<div class="message-box">
-			<textarea id="messageInput" placeholder="Type your message here..."></textarea>
-			<button class="clean-btn" onclick="sendMessage()">Send</button>
-		</div>
-	</section>
-
-	<section class="plane">
-		<h2>askspotify</h2>
-		
-		<button class = "clean-btn" onclick="askSpotify()">login</button>
-
-		
-	</section>
-
-	<section class="plane">
-		<h2>display spotify</h2>
-		
-		<button class = "clean-btn" onclick="displaySpotify()">display</button>
-
-		
-	</section> -->
-
-
-<!-- Scripts
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			// 1. Grab the button
-			const btn = document.getElementById('emailSend');
-			
-			// 2. Check if it exists, then attach the function
-			if (btn) {
-				btn.addEventListener('click', (e) => {
-					e.preventDefault(); // Stops the page from flickering/reloading
-					sendEmail("message");        // Calls the function in emailSend.js
-					});
-					}
-					});
-				</script> -->

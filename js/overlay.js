@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             { "x": 0.8595230741465489, "y": 0.053246753246753244 }],
             onClick: () => {
                 console.log("medals clicked!");
-                // do whatever you want here
+                openPopupMedals();
             }
         }
 

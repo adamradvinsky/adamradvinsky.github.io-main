@@ -1,118 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam's Room</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>My Room</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/overlay.js" defer></script>
 </head>
+
 <body>
 
-  <div id="scene">
-    <svg id="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <clipPath id="monitor-clip">
-          <polygon id="monitor-clip-poly" points="432,600 648,600 648,737 432,737"/>
-        </clipPath>
-        <filter id="glow-blue" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="glow-white" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <pattern id="scanlines" patternUnits="userSpaceOnUse" width="2" height="4">
-          <line x1="0" y1="0" x2="2" y2="0" stroke="rgba(0,0,0,0.5)" stroke-width="1"/>
-          <line x1="0" y1="2" x2="2" y2="2" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        </pattern>
-      </defs>
+  <div id="roomContainer">
 
-      <image id="svg-room" href="room.jpg" x="0" y="0"/>
-      <image id="monitor-img" href="" x="432" y="600" width="216" height="137"
-             clip-path="url(#monitor-clip)"
-             preserveAspectRatio="xMidYMid slice"
-             opacity="0"
-             style="pointer-events:none"/>
-      <rect id="monitor-scanlines" x="432" y="600" width="216" height="137"
-            clip-path="url(#monitor-clip)"/>
-      <polygon id="monitor-flash" points="432,600 648,600 648,737 432,737"/>
+    <img id="roomImage" src="room.jpg" alt="My Room">
+    <canvas id="overlay"></canvas>
 
-      <g id="regions-layer"></g>
-
-      <g id="draw-preview" style="pointer-events:none">
-        <polygon id="draw-fill-preview"
-                 fill="rgba(255,130,0,0.12)"
-                 stroke="#f80"
-                 stroke-width="1.5"
-                 stroke-dasharray="5,4"
-                 points=""/>
-        <line id="draw-snap-line"
-              stroke="#f80" stroke-width="1"
-              stroke-dasharray="4,3"
-              x1="0" y1="0" x2="0" y2="0" opacity="0"/>
-      </g>
-    </svg>
   </div>
 
-  <div id="tooltip"></div>
 
-  <!-- Projects overlay -->
-  <div id="projects-overlay">
-    <div id="projects-panel">
-      <div class="panel-chrome">
-        <div class="chrome-dot c" id="btn-close-projects"></div>
-        <div class="chrome-dot m"></div>
-        <div class="chrome-dot x"></div>
-        <div class="chrome-title">adam.dev — projects.exe</div>
-      </div>
-      <div class="panel-body">
-        <div class="panel-header">
-          <h1 id="panel-title">Projects</h1>
-          <p id="panel-sub"></p>
-        </div>
-        <div class="projects-grid" id="projects-grid"></div>
-      </div>
-    </div>
-  </div>
+  <button id="debugBtn">Toggle Debug</button>
 
-  <!-- Region editor -->
-  <div id="edit-panel">
-    <h3>⚠ Region Editor</h3>
-    <div class="edit-section-label">New Region</div>
-    <input type="text" id="inp-name"    placeholder="Name  (e.g. Medals)"/>
-    <input type="text" id="inp-tooltip" placeholder="Tooltip  (e.g. 🥇 Medals)"/>
-    <select id="inp-type">
-      <option value="highlight">Highlight</option>
-      <option value="monitor">Monitor  (opens projects)</option>
-      <option value="link">External Link</option>
-    </select>
-    <input type="text" id="inp-url" placeholder="URL  (if type = link)" style="display:none"/>
-    <div class="btn-row" style="margin-top:4px">
-      <button class="edit-btn primary" id="btn-draw-start">✏ Draw</button>
-      <button class="edit-btn" id="btn-draw-finish" disabled>✓ Save</button>
-      <button class="edit-btn danger" id="btn-draw-cancel">✕</button>
-    </div>
-    <div class="edit-section-label">Saved Regions</div>
-    <div class="region-list" id="region-list"></div>
-    <div class="btn-row" style="margin-top:10px">
-      <button class="edit-btn" id="btn-export">↓ Export JSON</button>
-      <button class="edit-btn danger" id="btn-reset">Reset Defaults</button>
-    </div>
-    <div id="edit-status">
-      Click "Draw" then click on the image to place polygon points.<br>
-      Double-click or click "Save" (≥3 pts) to finish.
-    </div>
-  </div>
-
-  <button id="edit-toggle">⚙ edit regions</button>
-
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/app.js"></script>
 </body>
+
 </html>

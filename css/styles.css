@@ -1,0 +1,35 @@
+/* Reset margins and set the body to take up the full screen height */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+
+  /* Flexbox makes centering incredibly easy */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* sets position in roomcontainer as relative */
+#roomContainer {
+  position: relative;
+  display: inline-block;
+}
+
+#roomImage {
+  max-width: 95vw;
+  max-height: 95vh;
+  display: block;
+}
+
+#overlay {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Matches the visual width of the container */
+  height: 100%;
+
+}

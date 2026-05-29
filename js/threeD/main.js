@@ -4,8 +4,8 @@ import * as THREE from 'three';
 // importer for 3d models
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import CameraController from './threeD/CameraController.js';
-import SpotLightController from './threeD/SpotLightController.js';
+import CameraController from './CameraController.js';
+import SpotLightController from './SpotLightController.js';
 
 
 

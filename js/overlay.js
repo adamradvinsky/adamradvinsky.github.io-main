@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const image = document.getElementById("roomImage");
     const canvas = document.getElementById("overlay");
     const ctx = canvas.getContext("2d");
-    const debugBtn = document.getElementById("debugBtn");
+    //    const debugBtn = document.getElementById("debugBtn");
 
     let debugMode = false;
     let currentPolygon = [];
@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     let hoveredRegion = null;
 
-    console.log("debugBtn found:", debugBtn);
 
     /* ----------------------------
        RESIZE HANDLING
@@ -77,10 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ----------------------------
        DEBUG TOGGLE
     ---------------------------- */
-    debugBtn.addEventListener("click", () => {
-        debugMode = !debugMode;
-        canvas.style.pointerEvents = debugMode ? "auto" : "none";
-        console.log("Debug mode:", debugMode);
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "D" && e.shiftKey) {
+            debugMode = !debugMode;
+            canvas.style.pointerEvents = debugMode ? "auto" : "none";
+            console.log("Debug mode:", debugMode);
+        }
     });
 
     /* ----------------------------

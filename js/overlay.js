@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 { "x": 0.5801658429969816, "y": 0.5558441558441558 }],
             onClick: () => {
                 console.log("monitor clicked!");
-                // do whatever you want here
+                openMonitor()
             }
 
 

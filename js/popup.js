@@ -3,6 +3,10 @@ let images = [
     "../assets/images/achievements/medal2.jpg",
     "../assets/images/achievements/medal3.jpg",
     "../assets/images/achievements/medal4.jpg",
+    "../assets/images/achievements/medal5.jpg",
+    "../assets/images/achievements/medal6.jpg",
+    "../assets/images/achievements/medal7.jpg",
+    "../assets/images/achievements/medal8.jpg",
 ]
 
 function openPopupMedals() {
